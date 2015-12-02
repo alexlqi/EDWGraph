@@ -9,6 +9,7 @@ header('content-type:application/json');
 
 $fechaIni=@$_POST["fechaInicio"];
 $fechaFin=@$_POST["fechaFin"];
+$tipo=(@$_POST["tipo"]!="")? $_POST["tipo"] : "";
 
 ## el formato de la matriz deberá ser el siguiente
 # key1  key2   key3 dato1 dato2 dato3
@@ -59,10 +60,15 @@ try {
 $plots=array();
 $nombres=array();
 try {
+
+	//checar si hay cambios si no hay mandar el error true
+
+	//si hay cambios entonces...
 	$sql="SELECT
 		(SELECT NOMBRE FROM params a1 WHERE ID_PARAM=t1.ID_PARAM) as NOMBRE,
 		DATE(t1.FECHA) as FECHA,
-	    SUM(t1.VALOR) as VALOR
+	    SUM(t1.VALOR) as SERIE1,
+	    SUM(t1.VALOR)*3 as SERIE2
 	FROM params_partidas t1
 	WHERE 
 		ID_PARAM IN (
@@ -84,18 +90,20 @@ try {
 			$plotNo=count($nombres);
 			array_push($nombres, $row["NOMBRE"]);
 		}
+
 		$plots["plot".$plotNo]["nombre"]=$row["NOMBRE"];
-		$plots["plot".$plotNo]["serie"][$row["FECHA"]]=$row["VALOR"];
+		$plots["plot".$plotNo]["tipo"]=$tipo;
+		$plots["plot".$plotNo]["serie"][0][$row["FECHA"]]=$row["SERIE1"];
+		$plots["plot".$plotNo]["serie"][1][$row["FECHA"]]=$row["SERIE2"];
+		
 	}
 
-	//echo $sql;
+	$r["err"]=false;
 } catch (PDOException $e) {
-	
+	$r["err"]=true;
+	$r["msg"]=$e->getMessage();
 }
 $r["data"]=$plots;//*/
 
-//var_dump($plots);
 echo json_encode($r);
-//var_dump($datos);
-
 ?>
