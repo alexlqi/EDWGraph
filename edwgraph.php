@@ -1,43 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>EDW Graph Framework</title>
-	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="js/jquery.numeric.js"></script>
-	<!--[if lt IE 9]><script language="javascript" type="text/javascript" src="excanvas.js"></script><![endif]-->
-	<script type="text/javascript" src="jqplot/jquery.jqplot.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
-	<link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.css" />
-	<link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.css" />
-	<link rel="stylesheet" type="text/css" href="jqplot/jquery.jqplot.css" />
-	<script type="text/javascript" src="js/edwgraph.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function(e){
-			// numerico es numeric
-			$(".numerico").numeric();
-
-			// fecha es datepicker
-			$(".fecha").datepicker({
-				dateFormat:"yy-mm-dd",
-			});
-
-			ajaxParams={
-				searchParams:{
-					fechaInicio:rangoFecha[0],
-					fechaFin:rangoFecha[1],
-				}
-			};
-
-			data2plot(ajaxParams);
-
-			ploteo();
-
-		});
-	</script>
-</head>
-<body>
+<script type="text/javascript" src="<?php echo __DIR__; ?>js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="<?php echo __DIR__; ?>js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?php echo __DIR__; ?>js/jquery.numeric.js"></script>
+<!--[if lt IE 9]><script language="javascript" type="text/javascript" src="<?php echo __DIR__; ?>excanvas.js"></script><![endif]-->
+<script type="text/javascript" src="<?php echo __DIR__; ?>jqplot/jquery.jqplot.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo __DIR__; ?>css/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo __DIR__; ?>css/jquery-ui.structure.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo __DIR__; ?>css/jquery-ui.theme.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo __DIR__; ?>jqplot/jquery.jqplot.css" />
+<script type="text/javascript" src="<?php echo __DIR__; ?>js/edwgraph.js"></script>
 <style type="text/css">
 .grafica1-frame{
 	width:90%;
@@ -48,6 +18,7 @@
 	width: 100%;
 }
 </style>
+<div class="edwgraph-ctrl">
 	<div><label>Tipo de gráfica</label>
 		<select class="select-renderer">
 			<option disabled="disabled" selected="selected">--elige un tipo de grafica--</option>
@@ -81,5 +52,4 @@
 	</div>
 	<div class="grafica-frame">
 	</div>
-</body>
-</html>
+</div>
